@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'apps.ambientes',
     'apps.patrimonios',
     'apps.manutentores',
-    "corsheaders",  
+    'apps.areas',
+    'corsheaders',  
     'apps.ordens_de_servico',
 ]
 

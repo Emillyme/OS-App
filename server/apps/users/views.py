@@ -20,18 +20,3 @@ class LogoutAPIView(APIView):
 
         def post(self,request):
             return Response({"message": "Logout realizado com sucesso!"}, status=200)
-
-# class Soma(APIView):
-#     def post(self, request):
-#         permission_classes = [AllowAny]
-
-#         a = request.data.get("a")
-#         b = request.data.get("b")
-
-#         if a is None or b is None:
-#             return Response({"erro": "Você precisa enviar A e B"},
-#             status=status.HTTP_400_BAD_REQUEST                
-#             )
-
-#         soma = a + b
-#         return Response({"soma": soma})
