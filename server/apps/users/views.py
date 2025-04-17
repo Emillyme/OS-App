@@ -10,9 +10,20 @@ class SignUpView(APIView):
         serializer = SignUpSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
+            username = serializer.validated_data['username']
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                is_staff=False,        # Usuário comum (sem acesso ao admin)
+                is_superuser=False     # Usuário comum (sem permissões totais)
+            )
+    
             return Response({'message': 'Usuário criado com sucesso!'}, status=status.HTTP_201_CREATED)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutAPIView(APIView):
