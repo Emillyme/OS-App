@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Gestor
+from .serializers import GestorSerializer
 
-# Create your views here.
+class GestorViewSet(viewsets.ModelViewSet):
+    queryset = Gestor.objects.all()
+    serializer_class = GestorSerializer
