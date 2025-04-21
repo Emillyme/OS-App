@@ -19,7 +19,7 @@ class OrdemServico(models.Model):
     ]
 
     descricao = models.TextField()
-    abertura = models.DateTimeField(auto_now_add=True)
+    abertura = models.DateTimeField(null=True, blank=True)
     fechamento = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendente')
     patrimonio = models.ForeignKey(Patrimonio, on_delete=models.SET_NULL, null=True, blank=True)
