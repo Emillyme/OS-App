@@ -5,10 +5,13 @@ import openpyxl
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
 
 class AreaViewSet(viewsets.ModelViewSet):
     queryset = Area.objects.all()
     serializer_class = AreaSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['nome']
 
 class UploadExcelView(APIView):
     def post(self, request):

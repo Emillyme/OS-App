@@ -5,10 +5,13 @@ import openpyxl
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
 
 class GestorViewSet(viewsets.ModelViewSet):
     queryset = Gestor.objects.all()
     serializer_class = GestorSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['sn_gest', 'nome', 'cargo']
 
 class UploadExcelView(APIView):
     def post(self, request):
