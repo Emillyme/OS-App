@@ -3,7 +3,7 @@ from apps.areas.models import Area
 from apps.gestores.models import Gestor
 
 class Manutentor(models.Model):
-    sn_manu = models.CharField(max_length=20, unique=True)
+    sn_manu = models.CharField(max_length=20)
     nome_manu = models.CharField(max_length=100)
     email = models.EmailField()
     area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True, blank=True)

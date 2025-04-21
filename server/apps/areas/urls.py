@@ -1,10 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import AreaViewSet
+from .views import AreaViewSet, UploadExcelView
 
 router = DefaultRouter()
 router.register(r'', AreaViewSet) 
 
 urlpatterns = [
+    path('upload/', UploadExcelView.as_view(), name='uploads'),
     path('', include(router.urls)),
 ]
