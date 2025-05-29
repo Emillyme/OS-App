@@ -4,6 +4,28 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import SignUpSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            response = Response({'message': 'Login bem-sucedido'})
+            response.set_cookie(
+                key='access_token',
+                value=str(refresh.access_token),
+                httponly=True,
+                secure=True,  
+                samesite='Lax'
+            )
+            return response
+        else:
+            return Response({'error': 'Credenciais inválidas'}, status=401)
 
 class SignUpView(APIView):
     def post(self, request):
