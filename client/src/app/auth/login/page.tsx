@@ -61,7 +61,7 @@ const Login = () => {
             Login
           </h1>
           <p className="text-neutral-400 max-w-lg mx-auto my-2 text-lg">
-            Preencha os dados para entrar no Ordem e serviços do Senai.
+            Preencha os dados para entrar no ordem e serviços do Senai.
           </p>
         </div>
       </div>
