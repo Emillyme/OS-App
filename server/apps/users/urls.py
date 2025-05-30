@@ -10,5 +10,5 @@ urlpatterns = [
     path('signupadmin/', SignUpAdminView.as_view(), name='signup_admin'),
     path('logout/', LogoutAPIView.as_view(), name='logout'),
     path('', AllUsersView.as_view(), name='Users'),
-    path('/<int:pk>', UserDetails.as_view(), name='Users_details'),
+    path('<int:pk>', UserDetails.as_view(), name='Users_details'),
 ] 
