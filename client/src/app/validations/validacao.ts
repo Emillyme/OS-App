@@ -17,7 +17,7 @@ export const signupSchema = z.object({
     password: z.string().min(5)
         .nonempty("Digite uma senha"),
     confirm: z.string().min(5)
-}).refine((data) => data.username === data.confirm, {
+}).refine((data) => data.password === data.confirm, {
     message: "Senhas não batem",
     path: ["confirm"],
 })
