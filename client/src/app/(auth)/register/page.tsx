@@ -6,19 +6,25 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale';
 
 type SignupForm = z.infer<typeof signupSchema>
 
 const register = () => {
     const router = useRouter()
+    const [dataAtual, setDataAtual] = useState('')
     const [mensagemErro, setMensagemErro] = useState(false)
+    const [sonner, setSonner] = useState(false)
     const [data, setData] = useState<SignupForm>()
     const { register, handleSubmit, formState: { errors }, reset, } = useForm<SignupForm>({
         resolver: zodResolver(signupSchema),
     })
+
 
     const onSubmit = async (formData: SignupForm) => {
         try {
@@ -38,12 +44,29 @@ const register = () => {
                 throw new Error('Erro na requisição de signup de usuário comum')
             }
             console.log('Cadastrado')
-            router.push('/login')
+            const hoje = format(new Date(), "EEEE, dd 'de' MMM 'de' yyyy", { locale: ptBR });
+            setDataAtual(hoje)
+            setSonner(true)
+            
         } catch (error) {
             console.log("Deu erro: ", error)
         }
     }
-    
+
+    useEffect(() => {
+        if (sonner) {
+            toast("Conta criada com sucesso!", {
+                description: dataAtual,
+                action: {
+                    label: "Login",
+                    onClick: () => router.push('/login')
+                }
+            });
+            setSonner(false); // 🔥 opcional: reseta pra não abrir mais
+        }
+    }, [sonner, dataAtual, router]);
+
+
     return (
         <>
             <div className='bg-neutral-950 h-screen relative overflow-hidden flex justify-center flex-col'>

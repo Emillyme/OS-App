@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 export default function LayoutAuth({
     children,
 }: Readonly<{
@@ -6,6 +7,7 @@ export default function LayoutAuth({
     return(
         <div className="">
             {children}
+            <Toaster/>
         </div>
     )
 }
